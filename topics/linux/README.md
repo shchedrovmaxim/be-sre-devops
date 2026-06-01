@@ -42,7 +42,7 @@ Try each out loud as if explaining to an interviewer. If you fumble, that's the 
 
 | Sub-topic | File | Date covered |
 |---|---|---|
-| _(empty — first session will populate this)_ | | |
+| cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj`, QoS mapping | [`cgroups-memory.md`](./cgroups-memory.md) | 2026-06-01 |
 
 ---
 
