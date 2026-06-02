@@ -6,7 +6,7 @@
 ## 1. Linux fundamentals
 - [ ] cgroups v1 vs v2 — controller hierarchy, unified vs split
 - [x] cgroups memory — `memory.max`, `memory.high`, `memory.low`, OOMKilled mechanics
-- [ ] cgroups CPU — `cpu.weight`, `cpu.max`, CFS throttling, request vs limit mapping
+- [x] cgroups CPU — `cpu.weight`, `cpu.max`, CFS throttling, request vs limit mapping
 - [ ] cgroups IO — `io.max`, EBS throttling implications
 - [ ] Namespaces — pid, net, mnt, uts, ipc, user, cgroup
 - [ ] How `runc` builds a container (namespaces + cgroups + capabilities + chroot)

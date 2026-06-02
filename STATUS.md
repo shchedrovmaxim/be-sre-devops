@@ -2,8 +2,8 @@
 
 > Read this first at the start of every session.
 
-**Last updated:** 2026-06-01
-**Last session:** Linux — cgroups memory deep dive (OOM mechanics, `oom_score_adj`, QoS mapping, hands-on)
+**Last updated:** 2026-06-02
+**Last session:** Linux — cgroups CPU deep dive (CFS quota+period, throttling vs starvation, GOMAXPROCS trap, limits-debate, hands-on)
 
 ---
 
@@ -21,7 +21,7 @@ Plus broadening to full senior-SRE shape across observability, EKS, Terraform, n
 
 ## Next up (pick one to start next session)
 
-Mixed across areas for variety. Don't pick two from the same area on consecutive sessions. Last session was **Linux**, so next should NOT be Linux.
+Mixed across areas for variety. Don't pick two from the same area on consecutive sessions. Last **two** sessions were **Linux** (cgroups memory + cgroups CPU), so next session should DEFINITELY NOT be Linux — rotate hard.
 
 ### Option A — CI/CD: multi-stage Docker builds
 - **File:** `topics/ci-cd/multi-stage-builds.md` (to write)
@@ -41,12 +41,12 @@ Mixed across areas for variety. Don't pick two from the same area on consecutive
 - **Goal:** clear mental model — "can pod run here (taints) → does pod want here (affinity) → spread evenly (topology)".
 - **Self-test:** "Pod won't schedule despite matching nodeSelector — walk me through what to check, in order."
 
-### Option D — Linux (queued for after one non-Linux session): cgroups CPU
-- **File:** `topics/linux/cgroups-cpu.md` (to write)
-- **Why:** natural continuation of cgroups memory (just covered). CPU has different OOM-equivalent: **throttling** instead of killing. Sub-second CFS quota windows are a top source of "my pod is mysteriously slow" bugs.
-- **Goal:** explain `cpu.weight` vs `cpu.max`, CFS quota+period mechanics, requests→weight / limits→quota mapping, why a pod under its limit can still be throttled.
-- **Self-test:** "Pod is using 30% CPU and feels slow but is well under its 1 CPU limit. Walk me through what could cause this."
-- **Rotation note:** per repo rules, don't do two consecutive Linux sessions. Pick A/B/C next; come back to this after.
+### Option D — Linux (queued for later): conntrack + UDP DNS implications
+- **File:** `topics/linux/conntrack-dns.md` (to write)
+- **Why:** classic senior gotcha — "intermittent DNS resolution fails under high load" → conntrack table full. Touches kernel networking + K8s CoreDNS + iptables.
+- **Goal:** explain `nf_conntrack_max`, why UDP DNS is the canary for table saturation, and how to mitigate (NodeLocal DNS Cache, raising the limit).
+- **Self-test:** "5% of pods get intermittent DNS NXDOMAIN under load. Walk me through how you'd diagnose."
+- **Rotation note:** queued. Do not pick consecutively after a Linux session.
 
 ---
 
@@ -54,17 +54,18 @@ Mixed across areas for variety. Don't pick two from the same area on consecutive
 
 | Date | Topic | Area | Status |
 |---|---|---|---|
+| 2026-06-02 | cgroups CPU — `cpu.max`, CFS quota+period, throttling vs starvation, GOMAXPROCS trap, limits debate | Linux | ✅ |
 | 2026-06-01 | cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj` + QoS, hands-on Docker walkthrough | Linux | ✅ |
 | (prior) | Gravitee — simple version + deep dive reference | Gravitee | ✅ |
 | (prior) | Istio — full reference (architecture, CRDs, mTLS, troubleshooting, 26 Q&A) | Istio | ✅ |
 
 ---
 
-## Rotation history (last 3 area focuses)
+## Rotation history (last 4 area focuses)
 
-`Istio → Gravitee → Linux`
+`Istio → Gravitee → Linux (memory) → Linux (CPU)`
 
-Suggestion for next session: any area EXCEPT Linux. CI/CD, Architecture, or K8s scheduling are the highest-leverage next picks given the rejection feedback.
+⚠️ Two consecutive Linux sessions — by user request, not by mistake. Next session **must** be non-Linux. CI/CD, Architecture, or K8s scheduling are the highest-leverage picks given the rejection feedback.
 
 ---
 

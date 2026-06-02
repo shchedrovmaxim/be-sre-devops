@@ -43,6 +43,7 @@ Try each out loud as if explaining to an interviewer. If you fumble, that's the 
 | Sub-topic | File | Date covered |
 |---|---|---|
 | cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj`, QoS mapping | [`cgroups-memory.md`](./cgroups-memory.md) | 2026-06-01 |
+| cgroups CPU — `cpu.max`, `cpu.weight`, CFS quota+period, throttling, GOMAXPROCS trap | [`cgroups-cpu.md`](./cgroups-cpu.md) | 2026-06-02 |
 
 ---
 
