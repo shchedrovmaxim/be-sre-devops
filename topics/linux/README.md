@@ -44,6 +44,7 @@ Try each out loud as if explaining to an interviewer. If you fumble, that's the 
 |---|---|---|
 | cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj`, QoS mapping | [`cgroups-memory.md`](./cgroups-memory.md) | 2026-06-01 |
 | cgroups CPU — `cpu.max`, `cpu.weight`, CFS quota+period, throttling, GOMAXPROCS trap | [`cgroups-cpu.md`](./cgroups-cpu.md) | 2026-06-02 |
+| cgroups CPU — simple version (buffet analogy, single-vs-multi-thread intuition) | [`cgroups-cpu-simple.md`](./cgroups-cpu-simple.md) | 2026-06-02 |
 
 ---
 
