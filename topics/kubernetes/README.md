@@ -56,7 +56,9 @@ The platform. Every senior SRE role assumes deep K8s. Focus on the **internals**
 
 ## Files
 
-(none yet — to be written)
+| Sub-topic | File | Date covered |
+|---|---|---|
+| Scheduling — taints, affinity, anti-affinity, topology spread + the 3-question mental model | [`scheduling-affinity.md`](./scheduling-affinity.md) | 2026-06-03 |
 
 ## Why this matters
 

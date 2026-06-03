@@ -18,13 +18,13 @@
 
 ## 2. Kubernetes
 ### Scheduling
-- [ ] Taints + tolerations — effects: NoSchedule, PreferNoSchedule, NoExecute
-- [ ] Node affinity — required vs preferred
-- [ ] Pod affinity — when (co-location for cache locality)
-- [ ] Pod anti-affinity — when (HA spread)
-- [ ] `topologySpreadConstraints` — when over anti-affinity
+- [x] Taints + tolerations — effects: NoSchedule, PreferNoSchedule, NoExecute
+- [x] Node affinity — required vs preferred
+- [x] Pod affinity — when (co-location for cache locality)
+- [x] Pod anti-affinity — when (HA spread)
+- [x] `topologySpreadConstraints` — when over anti-affinity
 - [ ] priorityClass + preemption
-- [ ] The mental model: "can pod run here (taints) → does pod want here (affinity) → spread evenly (topology)"
+- [x] The mental model: "can pod run here (taints) → does pod want here (affinity) → spread evenly (topology)"
 
 ### Resource management
 - [ ] requests vs limits — what each controls
