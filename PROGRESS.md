@@ -79,9 +79,9 @@
 - [ ] Kubeadm vs managed (EKS/GKE/AKS)
 
 ## 3. CI/CD + DevOps ecosystem
-- [ ] Multi-stage Docker builds + BuildKit
-- [ ] BuildKit cache mounts (`--mount=type=cache`)
-- [ ] Distroless / scratch base images
+- [x] Multi-stage Docker builds + BuildKit
+- [x] BuildKit cache mounts (`--mount=type=cache`)
+- [x] Distroless / scratch base images
 - [ ] Image scanning: Trivy, Grype
 - [ ] SBOM: Syft
 - [ ] Image signing: Cosign / Sigstore (keyless via OIDC)

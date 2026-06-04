@@ -32,7 +32,9 @@ The pipeline from code commit to production. Senior signal: you treat CI as arch
 
 ## Files
 
-(none yet — to be written; this area is a top priority per rejection feedback)
+| Sub-topic | File | Date covered |
+|---|---|---|
+| Multi-stage Docker builds + BuildKit cache mounts, distroless base images, security framing | [`multi-stage-builds.md`](./multi-stage-builds.md) | 2026-06-04 |
 
 ## Why this matters for senior SRE interviews
 

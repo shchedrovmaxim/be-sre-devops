@@ -3,7 +3,7 @@
 > Read this first at the start of every session.
 
 **Last updated:** 2026-06-04
-**Last session:** K8s scheduling (continued) — deepened `topologySpreadConstraints` section: maxSkew math diagrams, layered constraints, `matchLabelKeys` rolling-update fix, `minDomains`, `nodeAffinityPolicy/nodeTaintsPolicy`, cluster-wide defaults, real-world patterns; added 1 self-test drill on the rollout deadlock
+**Last session:** CI/CD — multi-stage Docker builds + BuildKit cache mounts + distroless (rejection-gap topic); single-stage problem walkthrough; multi-stage refactor with concrete numbers (~1.1GB→~180MB, ~180→0 CVEs); base-image decision table; ephemeral-debug-containers; hands-on build + scan comparison; bridged from user's Wiz/Kyverno production experience
 
 ---
 
@@ -21,32 +21,32 @@ Plus broadening to full senior-SRE shape across observability, EKS, Terraform, n
 
 ## Next up (pick one to start next session)
 
-Mixed across areas for variety. Don't pick two from the same area on consecutive sessions. Last session was **K8s** (scheduling), so next session shouldn't be K8s. Two rejection-gap topics are still uncovered — CI/CD and Architecture — both should come soon.
+Mixed across areas for variety. Don't pick two from the same area on consecutive sessions. Last session was **CI/CD**, so next session shouldn't be CI/CD. **Architecture is the last uncovered rejection-gap topic** — strong recommendation to pick it next.
 
-### Option A — CI/CD: multi-stage Docker builds
-- **File:** `topics/ci-cd/multi-stage-builds.md` (to write)
-- **Why:** explicit rejection feedback gap.
-- **Goal:** write a multi-stage Dockerfile with BuildKit cache mounts; compare image sizes; understand distroless.
-- **Self-test:** "Why is multi-stage with distroless final image more secure than single-stage on `node:20`?"
-
-### Option B — Architecture: KISS / YAGNI / justified complexity
+### Option A — Architecture: KISS / YAGNI / justified complexity (Recommended — last rejection-gap topic)
 - **File:** `topics/architecture/simplicity.md` (to write)
-- **Why:** rejection feedback flagged over-engineering; this is the senior mindset shift.
-- **Goal:** practice answering "design X" with the simplest viable approach first; learn when to add complexity.
+- **Why:** rejection feedback flagged over-engineering; this is the senior mindset shift. After this, all three rejection-gap areas are covered.
+- **Goal:** practice answering "design X" with the simplest viable approach first; learn when complexity is justified vs gratuitous.
 - **Self-test:** "Why might 'just a CronJob and a script' be a better answer than 'Argo Events + custom CRD'?"
 
-### Option C — Observability: SLI/SLO/SLA + error budgets
+### Option B — Observability: SLI/SLO/SLA + error budgets
 - **File:** `topics/observability/sli-slo-slas.md` (to write)
 - **Why:** classic senior SRE territory; comes up in nearly every senior interview.
 - **Goal:** define SLI/SLO/SLA cleanly; understand error budgets and how they drive engineering velocity; pick SLIs that actually matter.
-- **Self-test:** "How would you set up an SLO for a service that has both a latency requirement and an availability requirement? What's the error budget policy?"
+- **Self-test:** "How would you set up an SLO for a service with both a latency and availability requirement? What's the error budget policy?"
 
-### Option D — Linux (queued for later): conntrack + UDP DNS implications
+### Option C — Linux: conntrack + UDP DNS implications
 - **File:** `topics/linux/conntrack-dns.md` (to write)
 - **Why:** classic senior gotcha — "intermittent DNS resolution fails under high load" → conntrack table full. Touches kernel networking + K8s CoreDNS + iptables.
 - **Goal:** explain `nf_conntrack_max`, why UDP DNS is the canary for table saturation, and how to mitigate (NodeLocal DNS Cache, raising the limit).
 - **Self-test:** "5% of pods get intermittent DNS NXDOMAIN under load. Walk me through how you'd diagnose."
-- **Rotation note:** queued for later — fine to pick next since the last session was K8s, not Linux.
+
+### Option D — K8s: pod lifecycle + SIGTERM + PDB (queued)
+- **File:** `topics/kubernetes/pod-lifecycle-sigterm.md` (to write)
+- **Why:** the "why is my deploy taking down requests" gap; very common interview question on graceful shutdown.
+- **Goal:** preStop hooks, terminationGracePeriodSeconds, SIGTERM handling in app code, PodDisruptionBudget vs lifecycle, native sidecars.
+- **Self-test:** "A rolling deploy is dropping in-flight requests despite probes being green. Walk me through what to check."
+- **Rotation note:** queued — fine after one non-K8s session.
 
 ---
 
@@ -54,6 +54,7 @@ Mixed across areas for variety. Don't pick two from the same area on consecutive
 
 | Date | Topic | Area | Status |
 |---|---|---|---|
+| 2026-06-04 | CI/CD — multi-stage Docker builds + BuildKit cache mounts + distroless; security framing via Wiz/Kyverno bridge | CI/CD | ✅ |
 | 2026-06-04 | K8s scheduling (continued) — deepened topologySpreadConstraints: maxSkew math, layered constraints, matchLabelKeys, minDomains, nodeAffinityPolicy | K8s | ✅ |
 | 2026-06-03 | K8s scheduling — taints, affinity, anti-affinity, topology spread; 3-question mental model; "won't schedule" troubleshooting flow | K8s | ✅ |
 | 2026-06-02 | cgroups CPU — `cpu.max`, CFS quota+period, throttling vs starvation, GOMAXPROCS trap, limits debate (+ simple companion w/ buffet analogy) | Linux | ✅ |
@@ -63,11 +64,11 @@ Mixed across areas for variety. Don't pick two from the same area on consecutive
 
 ---
 
-## Rotation history (last 5 area focuses)
+## Rotation history (last 6 area focuses)
 
-`Istio → Gravitee → Linux (memory) → Linux (CPU) → K8s (scheduling)`
+`Istio → Gravitee → Linux (memory) → Linux (CPU) → K8s (scheduling) → CI/CD (multi-stage)`
 
-Rotation now clean again. Next session should not be K8s. CI/CD and Architecture are the remaining rejection-gap areas — prioritize one of them.
+Rotation clean. Next session should not be CI/CD. **Architecture is the last unaddressed rejection-gap area** — strongly consider picking it next.
 
 ---
 
