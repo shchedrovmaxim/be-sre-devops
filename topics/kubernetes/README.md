@@ -59,6 +59,8 @@ The platform. Every senior SRE role assumes deep K8s. Focus on the **internals**
 | Sub-topic | File | Date covered |
 |---|---|---|
 | Scheduling — taints, affinity, anti-affinity, topology spread + the 3-question mental model | [`scheduling-affinity.md`](./scheduling-affinity.md) | 2026-06-03 |
+| Pod lifecycle — simple version (airplane-deplaning analogy for graceful shutdown) | [`pod-lifecycle-simple.md`](./pod-lifecycle-simple.md) | 2026-06-04 |
+| Pod lifecycle — phases, termination sequence, SIGTERM, preStop, probes, PDB, init containers, native sidecars | [`pod-lifecycle.md`](./pod-lifecycle.md) | 2026-06-04 |
 
 ## Why this matters
 

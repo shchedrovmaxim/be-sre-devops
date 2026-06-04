@@ -35,12 +35,12 @@
 - [ ] Memory limits vs cgroup `memory.max` mapping
 
 ### Pod lifecycle
-- [ ] Pod phases: Pending → Running → Succeeded/Failed
-- [ ] Init containers (sequential, before app)
-- [ ] Native sidecars (K8s 1.29+, `restartPolicy: Always` on init container)
-- [ ] Probes: liveness, readiness, startup
-- [ ] `terminationGracePeriodSeconds` + SIGTERM handling
-- [ ] PodDisruptionBudget
+- [x] Pod phases: Pending → Running → Succeeded/Failed
+- [x] Init containers (sequential, before app)
+- [x] Native sidecars (K8s 1.29+, `restartPolicy: Always` on init container)
+- [x] Probes: liveness, readiness, startup
+- [x] `terminationGracePeriodSeconds` + SIGTERM handling
+- [x] PodDisruptionBudget
 
 ### Workload controllers
 - [ ] Deployment, ReplicaSet — rolling update mechanics
