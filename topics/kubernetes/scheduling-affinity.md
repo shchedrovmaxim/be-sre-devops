@@ -193,7 +193,7 @@ Translation: "don't schedule me into a zone that already has a pod with `app: my
 
 ### 4. `topologySpreadConstraints` — "spread evenly"
 
-This is the modern, more expressive alternative to anti-affinity for HA spread.
+This is the modern, more expressive alternative to anti-affinity for HA spread. Worth a deeper look because senior interviewers probe it hard.
 
 ```yaml
 topologySpreadConstraints:
@@ -205,24 +205,216 @@ topologySpreadConstraints:
       app: my-api
 ```
 
-The three fields you need to know:
+#### The three fields you need to know
 
 | Field | What it controls |
 |---|---|
-| `maxSkew` | Max allowed difference in pod count between any two topology buckets. `maxSkew: 1` over 3 zones → counts like 3/3/2 are OK; 4/3/2 is not. |
-| `topologyKey` | Same idea as anti-affinity — what defines a "bucket" (zone, host, region). |
-| `whenUnsatisfiable` | `DoNotSchedule` (hard — pod stays Pending if it'd violate skew) or `ScheduleAnyway` (soft — schedule but try to minimize skew). |
+| `maxSkew` | Max allowed difference between the most-loaded and least-loaded topology bucket. |
+| `topologyKey` | What defines a "bucket" — node label name. Common: `topology.kubernetes.io/zone`, `kubernetes.io/hostname`. |
+| `whenUnsatisfiable` | `DoNotSchedule` (hard — pod stays Pending if it would violate skew) or `ScheduleAnyway` (soft — schedule but try to minimize skew). |
 
-**Why use this over anti-affinity?**
+#### `maxSkew` — the math, with diagrams
 
-- More expressive: "max 2 per zone" is impossible with anti-affinity (it's only "0 or 1"), trivial with topology spread.
-- Scales better.
-- Lets you set soft (`ScheduleAnyway`) which is hard to express with `required` anti-affinity.
-- Combines with `nodeAffinityPolicy` / `nodeTaintsPolicy` to respect the upstream filters.
+`maxSkew` is **(count in most-loaded domain) − (count in least-loaded domain)**. Domains here = the set of distinct values of `topologyKey` across nodes the pod is eligible to land on.
 
-**The senior answer to "anti-affinity vs topology spread":**
+Worked examples — 3 zones (`a`, `b`, `c`), `maxSkew: 1`:
 
-> "I use topology spread by default — it's more expressive and scales better. I use pod anti-affinity only when I genuinely need 'never more than one on the same X' as a hard rule. Pod affinity (co-location) still has its place — topology spread is purely about spreading, not co-locating."
+```
+4 replicas, allowed distributions:        4 replicas, NOT allowed:
+  zone-a: ██                                zone-a: ████          (skew = 4 - 0 = 4)
+  zone-b: █                                 zone-b:               
+  zone-c: █                                 zone-c:               
+  skew = 2 - 1 = 1 ✅                       
+                                            zone-a: ███           (skew = 3 - 0 = 3)
+                                            zone-b: █             
+                                            zone-c:               
+
+5 replicas, allowed:                       7 replicas, allowed:
+  zone-a: ██                                zone-a: ███
+  zone-b: ██                                zone-b: ██
+  zone-c: █                                 zone-c: ██
+  skew = 2 - 1 = 1 ✅                       skew = 3 - 2 = 1 ✅
+```
+
+Note the **5 replicas case**: there's no way to land at perfectly even 2/2/1; that 1-pod gap is allowed because `maxSkew: 1` permits it. If you set `maxSkew: 0` you'd force perfectly even — which means 5 replicas could never fit into 3 zones at all (`5 / 3` isn't integer). That's almost never what you want; `maxSkew: 0` is mostly a trap.
+
+#### `whenUnsatisfiable` — DoNotSchedule vs ScheduleAnyway
+
+| | `DoNotSchedule` | `ScheduleAnyway` |
+|---|---|---|
+| What happens if constraint would be violated | Pod stays `Pending` | Pod schedules anyway; scheduler picks the node that minimizes skew |
+| Use when | Hard HA requirement: "I will not run 4 of 5 replicas in one zone" | Best-effort spread: "I prefer even spread but never block a deploy" |
+| Failure mode under capacity pressure | Deploy stalls | Skew temporarily violated, alert |
+
+The senior heuristic: **`ScheduleAnyway` for most production workloads.** A blocked deploy is a worse outcome than a temporary skew that you can detect and rebalance. Reserve `DoNotSchedule` for truly critical HA (etcd, control plane components).
+
+#### Layered constraints — node AND zone
+
+This is the pattern you actually deploy. You want pods spread across zones for AZ-failure resilience AND spread across nodes within a zone for node-failure resilience.
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app: my-api
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app: my-api
+```
+
+Two constraints, both evaluated, both must be satisfied. With 9 replicas + 3 zones × 3 nodes per zone you get 1 pod per node, perfectly spread. Beautiful. This single pattern replaces 90% of pod anti-affinity configs you'll see in older charts.
+
+#### The rolling-update trap — and `matchLabelKeys`
+
+This is the gotcha that distinguishes senior candidates. **Anti-affinity, naively configured, deadlocks rolling updates.**
+
+Scenario: Deployment with 3 replicas. Pod anti-affinity says "never more than 1 per node." You have 3 nodes. Steady state: 1 pod per node ✅.
+
+Now you push a new image. K8s tries to start a 4th pod (new version) before terminating an old one. **The 4th pod can't schedule** — every node already has a matching pod. Rollout is stuck.
+
+The fix used to be `maxSurge: 0, maxUnavailable: 1` on the Deployment — terminate first, then schedule. That works but hurts availability during rollouts.
+
+K8s 1.27+ adds **`matchLabelKeys`** to `topologySpreadConstraints`, which solves this cleanly:
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchLabels:
+      app: my-api
+  matchLabelKeys:        # ← the magic
+  - pod-template-hash
+```
+
+`matchLabelKeys` says "when counting matching pods, **only count pods that share the same value for these label keys as me.**" Every Deployment auto-labels its pods with `pod-template-hash` (one hash per ReplicaSet). So during a rollout:
+
+- New-version pods spread among themselves (3 of them, 3 nodes — fits).
+- Old-version pods spread among themselves (also 3, 3 nodes — fits).
+- The two groups don't constrain each other.
+
+**Result**: surge replicas don't deadlock. No more `maxUnavailable: 1` workaround.
+
+If your cluster is on K8s 1.27+ — and most managed K8s is by now — **always set `matchLabelKeys: [pod-template-hash]` on Deployment topology spread constraints.** It's free correctness.
+
+#### `minDomains` — force scheduling into N domains
+
+K8s 1.25+. Use when you need a *minimum* number of domains, not just balanced spread.
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  minDomains: 3                    # require pods spread across ≥ 3 zones
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchLabels:
+      app: my-api
+```
+
+Without `minDomains`, if zone-c is briefly empty (no nodes), the scheduler considers only zones a and b, and 5 replicas might distribute 3/2 across them — looks balanced but you're not actually multi-AZ. `minDomains: 3` says "no, refuse to schedule unless 3 zones are in play."
+
+Only works with `whenUnsatisfiable: DoNotSchedule`. Useful for compliance/SLA requirements that mandate multi-AZ presence.
+
+#### `nodeAffinityPolicy` and `nodeTaintsPolicy` — what counts as a "domain"?
+
+K8s 1.26+. Both default to `Honor` in modern versions, but worth knowing what they mean.
+
+When the scheduler counts pods per domain, **should it count nodes the pod can't even use** (because of taints or nodeAffinity mismatch)?
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchLabels:
+      app: my-api
+  nodeAffinityPolicy: Honor    # only count nodes matching pod's nodeAffinity
+  nodeTaintsPolicy: Honor      # only count nodes whose taints the pod tolerates
+```
+
+**Honor** = the scheduler ignores nodes the pod can't land on. This is what you want 99% of the time — "spread across zones the pod can actually use."
+
+**Ignore** = the scheduler counts all nodes regardless. Subtle but breaks things: imagine 3 zones, 2 are GPU-tainted, your CPU pod can only use 1. With `Ignore`, the scheduler thinks "3 domains exist, I should spread to all of them" and refuses to schedule because 2 are unreachable.
+
+**Interview soundbite**: "Honor means the scheduler asks 'where *can* this pod go?' before spreading. Ignore means it spreads first and asks questions later — usually wrong."
+
+#### Cluster-wide default constraints
+
+You can set defaults in the scheduler's config (`KubeSchedulerConfiguration`) so every pod without explicit constraints gets sensible spread:
+
+```yaml
+# In the scheduler's profile config:
+pluginConfig:
+- name: PodTopologySpread
+  args:
+    defaultConstraints:
+    - maxSkew: 3
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+    defaultingType: List   # use these defaults (not "System" auto-defaults)
+```
+
+Pods that don't specify their own constraints inherit these. Great for cluster operators who want soft cluster-wide HA without asking app teams to opt in. App teams can still override per-pod.
+
+This is rarely visible to app developers — it's a platform-team move. Worth knowing it exists for "how would you make every pod in the cluster zone-aware?" interview questions.
+
+#### Real-world patterns you'll actually deploy
+
+**Pattern 1 — Production web service, K8s 1.27+:**
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector: { matchLabels: { app: my-api } }
+  matchLabelKeys: [pod-template-hash]
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector: { matchLabels: { app: my-api } }
+  matchLabelKeys: [pod-template-hash]
+```
+
+Zone + node spread, soft, rollout-safe. **This is the default for stateless services.**
+
+**Pattern 2 — Stateful workload requiring hard zone diversity:**
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  minDomains: 3
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector: { matchLabels: { app: kafka } }
+```
+
+Refuse to come up unless we're in ≥ 3 AZs. Right for quorum-based systems (etcd, Kafka, Zookeeper).
+
+**Pattern 3 — DaemonSet-ish "1 per node max":**
+
+Use anti-affinity here — it's literally what it was designed for. Topology spread with `maxSkew: 1` works but is more verbose.
+
+#### Why use topology spread over anti-affinity?
+
+- **More expressive** — "max 2 per zone" is impossible with anti-affinity, trivial here.
+- **Scales better** — anti-affinity's O(pods²) evaluation hurts at scale.
+- **Soft mode** (`ScheduleAnyway`) — anti-affinity has `preferred` but it's clunky for skew.
+- **`matchLabelKeys`** — solves the rolling-update deadlock cleanly.
+- **`minDomains`** — anti-affinity can't express "must span ≥ N zones."
+
+#### The senior answer to "anti-affinity vs topology spread"
+
+> "I default to topologySpreadConstraints — it's more expressive, scales better, and `matchLabelKeys` resolves the rolling-update deadlock that anti-affinity has. I layer two constraints: one for zone spread, one for node spread, both with `ScheduleAnyway` so deploys never stall. I reserve pod anti-affinity for two cases: when I want a hard 'never more than 1 per node' for things like a DaemonSet-style deployment, or when I'm working in an older chart that already uses it. For co-location — which anti-affinity can't do anyway — pod affinity is still the right tool."
 
 ---
 
@@ -329,10 +521,18 @@ Now you're looking at resource requests vs node allocatable. Different problem.
 ### 2. When would you use pod anti-affinity vs `topologySpreadConstraints`?
 
 **Reference answer:**
-- Topology spread by default — more expressive, scales better, supports `maxSkew > 1`, supports `ScheduleAnyway` cleanly.
-- Anti-affinity only when you need a hard "never more than 1 per X" guarantee, or when integrating with older charts that already use it.
-- For HA spread of replicas across zones: topology spread wins.
+- Topology spread by default — more expressive (can do `maxSkew > 1`), scales better, supports `ScheduleAnyway` cleanly, and has `matchLabelKeys` which **resolves the rolling-update deadlock** that naive anti-affinity creates.
+- Layer two constraints in practice: one for zone spread, one for node spread, both `ScheduleAnyway`. Always set `matchLabelKeys: [pod-template-hash]` on K8s 1.27+ for rollout safety.
+- Use `minDomains` when you need a hard "must span ≥ N AZs" guarantee (quorum systems like etcd, Kafka).
+- Anti-affinity only for hard "never more than 1 per node" cases or when integrating with older charts that already use it.
 - For co-location (which anti-affinity can't do anyway): pod affinity is the only option.
+
+### 4. A Deployment with 3 replicas and pod anti-affinity (`maxReplicas: 1 per node`, 3 nodes) deadlocks on rolling updates. Why? How would you fix it?
+
+**Reference answer:**
+- Anti-affinity counts *all* matching pods regardless of version. During a rollout, K8s wants to surge a 4th pod (new version) before terminating an old one — but every node already holds a matching pod, so the new one can't schedule. Stuck.
+- Quick fix: `maxSurge: 0, maxUnavailable: 1` on the Deployment — terminate first, schedule second. Costs availability during rollouts.
+- Better fix: switch to `topologySpreadConstraints` with `matchLabelKeys: [pod-template-hash]` (K8s 1.27+). That makes the constraint apply *only within the same ReplicaSet*, so the new-version pods spread among themselves without being blocked by old-version pods. Clean rollout, no surge limit needed.
 
 ### 3. GPU node tainted `nvidia=true:NoSchedule`. Pod has toleration AND `nodeAffinity` requiring `arch=amd64`. Node has `arch=arm64`. Will it land there?
 

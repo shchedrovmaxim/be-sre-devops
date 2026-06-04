@@ -2,8 +2,8 @@
 
 > Read this first at the start of every session.
 
-**Last updated:** 2026-06-03
-**Last session:** K8s scheduling — taints + affinity + anti-affinity + topology spread, the 3-question mental model, "won't schedule" troubleshooting flow (THE rejection-gap topic)
+**Last updated:** 2026-06-04
+**Last session:** K8s scheduling (continued) — deepened `topologySpreadConstraints` section: maxSkew math diagrams, layered constraints, `matchLabelKeys` rolling-update fix, `minDomains`, `nodeAffinityPolicy/nodeTaintsPolicy`, cluster-wide defaults, real-world patterns; added 1 self-test drill on the rollout deadlock
 
 ---
 
@@ -54,6 +54,7 @@ Mixed across areas for variety. Don't pick two from the same area on consecutive
 
 | Date | Topic | Area | Status |
 |---|---|---|---|
+| 2026-06-04 | K8s scheduling (continued) — deepened topologySpreadConstraints: maxSkew math, layered constraints, matchLabelKeys, minDomains, nodeAffinityPolicy | K8s | ✅ |
 | 2026-06-03 | K8s scheduling — taints, affinity, anti-affinity, topology spread; 3-question mental model; "won't schedule" troubleshooting flow | K8s | ✅ |
 | 2026-06-02 | cgroups CPU — `cpu.max`, CFS quota+period, throttling vs starvation, GOMAXPROCS trap, limits debate (+ simple companion w/ buffet analogy) | Linux | ✅ |
 | 2026-06-01 | cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj` + QoS, hands-on Docker walkthrough | Linux | ✅ |
