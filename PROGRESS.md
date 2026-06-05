@@ -4,17 +4,17 @@
 > `[~]` = partial coverage, needs more depth. `[ ]` = not yet started.
 
 ## 1. Linux fundamentals
-- [ ] cgroups v1 vs v2 — controller hierarchy, unified vs split
+- [x] cgroups v1 vs v2 — controller hierarchy, unified vs split
 - [x] cgroups memory — `memory.max`, `memory.high`, `memory.low`, OOMKilled mechanics
 - [x] cgroups CPU — `cpu.weight`, `cpu.max`, CFS throttling, request vs limit mapping
-- [ ] cgroups IO — `io.max`, EBS throttling implications
-- [ ] Namespaces — pid, net, mnt, uts, ipc, user, cgroup
-- [ ] How `runc` builds a container (namespaces + cgroups + capabilities + chroot)
-- [ ] iptables / nftables basics
-- [ ] conntrack (UDP DNS implications; intermittent timeouts)
-- [ ] systemd basics (services, units, journalctl)
-- [ ] File descriptors, ulimits, inodes
-- [ ] Process accounting and `/proc` exploration
+- [x] cgroups IO — `io.max`, EBS throttling implications
+- [x] Namespaces — pid, net, mnt, uts, ipc, user, cgroup
+- [x] How `runc` builds a container (namespaces + cgroups + capabilities + chroot)
+- [x] iptables / nftables basics
+- [x] conntrack (UDP DNS implications; intermittent timeouts)
+- [x] systemd basics (services, units, journalctl)
+- [x] File descriptors, ulimits, inodes
+- [~] Process accounting and `/proc` exploration — touched in namespaces + ulimits docs
 
 ## 2. Kubernetes
 ### Scheduling
@@ -23,16 +23,16 @@
 - [x] Pod affinity — when (co-location for cache locality)
 - [x] Pod anti-affinity — when (HA spread)
 - [x] `topologySpreadConstraints` — when over anti-affinity
-- [ ] priorityClass + preemption
+- [x] priorityClass + preemption
 - [x] The mental model: "can pod run here (taints) → does pod want here (affinity) → spread evenly (topology)"
 
 ### Resource management
-- [ ] requests vs limits — what each controls
-- [ ] QoS classes: Guaranteed / Burstable / BestEffort
-- [ ] Eviction order under node pressure
-- [ ] `kube-reserved`, `system-reserved`, `eviction-hard` kubelet flags
-- [ ] CPU throttling vs starvation
-- [ ] Memory limits vs cgroup `memory.max` mapping
+- [x] requests vs limits — what each controls
+- [x] QoS classes: Guaranteed / Burstable / BestEffort
+- [x] Eviction order under node pressure
+- [x] `kube-reserved`, `system-reserved`, `eviction-hard` kubelet flags
+- [x] CPU throttling vs starvation
+- [x] Memory limits vs cgroup `memory.max` mapping
 
 ### Pod lifecycle
 - [x] Pod phases: Pending → Running → Succeeded/Failed
@@ -43,59 +43,59 @@
 - [x] PodDisruptionBudget
 
 ### Workload controllers
-- [ ] Deployment, ReplicaSet — rolling update mechanics
-- [ ] StatefulSet — ordered start/stop, stable network IDs, persistent storage
-- [ ] DaemonSet — node-level workloads
-- [ ] Job, CronJob — completion semantics, backoff
-- [ ] HorizontalPodAutoscaler — metric server, custom metrics
+- [x] Deployment, ReplicaSet — rolling update mechanics
+- [x] StatefulSet — ordered start/stop, stable network IDs, persistent storage
+- [x] DaemonSet — node-level workloads
+- [x] Job, CronJob — completion semantics, backoff
+- [x] HorizontalPodAutoscaler — metric server, custom metrics
 
 ### Networking & services
-- [ ] Services: ClusterIP, NodePort, LoadBalancer, ExternalName, Headless
-- [ ] Endpoints vs EndpointSlices
-- [ ] kube-proxy modes: iptables, IPVS, eBPF
-- [ ] CNI choices and what they own
-- [ ] NetworkPolicy — ingress + egress rules
-- [ ] Ingress vs Gateway API
-- [ ] CoreDNS + NodeLocal DNS Cache
+- [x] Services: ClusterIP, NodePort, LoadBalancer, ExternalName, Headless
+- [x] Endpoints vs EndpointSlices
+- [x] kube-proxy modes: iptables, IPVS, eBPF
+- [x] CNI choices and what they own
+- [x] NetworkPolicy — ingress + egress rules
+- [x] Ingress vs Gateway API
+- [x] CoreDNS + NodeLocal DNS Cache
 
 ### Storage
-- [ ] CSI — what it is, how drivers work
-- [ ] StorageClass + dynamic provisioning
-- [ ] PVC / PV lifecycle, reclaim policies
-- [ ] Volume expansion
-- [ ] Snapshot CRDs
+- [x] CSI — what it is, how drivers work
+- [x] StorageClass + dynamic provisioning
+- [x] PVC / PV lifecycle, reclaim policies
+- [x] Volume expansion
+- [x] Snapshot CRDs
 
 ### Security
-- [ ] RBAC: Role / ClusterRole / RoleBinding / ClusterRoleBinding
-- [ ] ServiceAccounts + token projection
-- [ ] PodSecurityStandards (Privileged / Baseline / Restricted)
-- [ ] securityContext — runAsNonRoot, readOnlyRootFilesystem, capabilities
-- [ ] Image pull secrets + private registries
+- [x] RBAC: Role / ClusterRole / RoleBinding / ClusterRoleBinding
+- [x] ServiceAccounts + token projection
+- [x] PodSecurityStandards (Privileged / Baseline / Restricted)
+- [x] securityContext — runAsNonRoot, readOnlyRootFilesystem, capabilities
+- [x] Image pull secrets + private registries
 
 ### Cluster ops
-- [ ] etcd basics — performance, backup/restore
-- [ ] Control plane components — kube-apiserver, scheduler, controller-manager
-- [ ] Upgrade flow: control plane → nodes
-- [ ] Kubeadm vs managed (EKS/GKE/AKS)
+- [x] etcd basics — performance, backup/restore
+- [x] Control plane components — kube-apiserver, scheduler, controller-manager
+- [x] Upgrade flow: control plane → nodes
+- [x] Kubeadm vs managed (EKS/GKE/AKS)
 
 ## 3. CI/CD + DevOps ecosystem
 - [x] Multi-stage Docker builds + BuildKit
 - [x] BuildKit cache mounts (`--mount=type=cache`)
 - [x] Distroless / scratch base images
-- [ ] Image scanning: Trivy, Grype
-- [ ] SBOM: Syft
-- [ ] Image signing: Cosign / Sigstore (keyless via OIDC)
-- [ ] Admission policy enforcement: Kyverno / OPA Gatekeeper
-- [ ] ArgoCD: Application, AppProject, ApplicationSet
-- [ ] ArgoCD: sync waves, sync hooks (PreSync, Sync, PostSync, SyncFail)
-- [ ] ArgoCD: `ignoreDifferences`, Server-Side Apply
-- [ ] ArgoCD: app-of-apps pattern
-- [ ] ArgoCD Image Updater
-- [ ] Renovate (when over Dependabot)
-- [ ] Dependabot
-- [ ] GitHub Actions runners (self-hosted patterns)
-- [ ] Trunk-based development + immutable promotion across envs
-- [ ] Conftest / OPA in CI
+- [x] Image scanning: Trivy, Grype
+- [x] SBOM: Syft
+- [x] Image signing: Cosign / Sigstore (keyless via OIDC)
+- [x] Admission policy enforcement: Kyverno / OPA Gatekeeper
+- [x] ArgoCD: Application, AppProject, ApplicationSet
+- [x] ArgoCD: sync waves, sync hooks (PreSync, Sync, PostSync, SyncFail)
+- [x] ArgoCD: `ignoreDifferences`, Server-Side Apply
+- [x] ArgoCD: app-of-apps pattern
+- [x] ArgoCD Image Updater
+- [x] Renovate (when over Dependabot)
+- [x] Dependabot
+- [x] GitHub Actions runners (self-hosted patterns)
+- [x] Trunk-based development + immutable promotion across envs
+- [x] Conftest / OPA in CI
 
 ## 4. Certificates
 - [x] Let's Encrypt + ACME protocol
@@ -119,23 +119,23 @@
 - [x] ADRs (Architecture Decision Records) — Context / Decision / Consequences
 - [x] Runbooks as deliverables, not afterthoughts
 - [x] Onboarding new engineers in <1 week as design constraint
-- [ ] Blameless postmortems (Google SRE book pattern)
-- [ ] The 5 whys for root cause
-- [ ] CI as architecture (immutable promotion, trunk-based)
+- [x] Blameless postmortems (Google SRE book pattern)
+- [x] The 5 whys for root cause
+- [x] CI as architecture (immutable promotion, trunk-based)
 - [x] **The 4 dimensions framework**: Tech + People + CI/CD + Operations
 - [x] Practice: 3 design questions answered with all 4 dimensions
 
 ## 7. Observability
-- [ ] Prometheus: scrape config, targets, relabeling
-- [ ] Recording rules vs alerting rules
-- [ ] PromQL: rate, histogram_quantile, topk, sum by, irate
-- [ ] Cardinality discipline
-- [ ] Long-term storage: Thanos / Mimir / VictoriaMetrics
-- [ ] OpenTelemetry: collector architecture (receivers/processors/exporters)
-- [ ] Semantic conventions
-- [ ] Sampling: head-based vs tail-based
-- [ ] Grafana dashboards as code
-- [ ] Loki for logs (label cardinality discipline)
+- [x] Prometheus: scrape config, targets, relabeling
+- [x] Recording rules vs alerting rules
+- [x] PromQL: rate, histogram_quantile, topk, sum by, irate
+- [x] Cardinality discipline
+- [x] Long-term storage: Thanos / Mimir / VictoriaMetrics
+- [x] OpenTelemetry: collector architecture (receivers/processors/exporters)
+- [x] Semantic conventions
+- [x] Sampling: head-based vs tail-based
+- [x] Grafana dashboards as code
+- [x] Loki for logs (label cardinality discipline)
 - [~] USE / RED methods — mentioned in slos.md context; not deep-dived
 - [x] SLI / SLO / SLA design + error budgets
 - [x] Alert design: avoiding fatigue, actionable signals — covered via multi-window multi-burn-rate
@@ -147,10 +147,10 @@
 - [x] IRSA — how the token exchange works end-to-end
 - [x] AWS VPC CNI: prefix delegation, security groups for pods
 - [x] AWS Load Balancer Controller: NLB vs ALB, target types
-- [ ] ExternalDNS for Route 53
-- [ ] CloudFront + Shield + WAF in front of EKS
-- [ ] Secrets Manager vs Parameter Store
-- [ ] CloudWatch vs Prometheus/OTel — cost trade-offs
+- [x] ExternalDNS for Route 53
+- [x] CloudFront + Shield + WAF in front of EKS
+- [x] Secrets Manager vs Parameter Store
+- [x] CloudWatch vs Prometheus/OTel — cost trade-offs
 
 ## 9. Terraform
 - [x] Remote state: S3 backend + DynamoDB locking
