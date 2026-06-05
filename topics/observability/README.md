@@ -33,7 +33,10 @@ Metrics, logs, traces. The signal you operate the system from. SLO-driven thinki
 
 ## Files
 
-(none yet — to be written)
+| Sub-topic | File | Date covered |
+|---|---|---|
+| SLI / SLO / Error budgets — simple version (monthly data-plan analogy) | [`slos-simple.md`](./slos-simple.md) | 2026-06-05 |
+| SLI / SLO / SLA / Error budgets — deep-dive (CUJ, budget policy, multi-window multi-burn-rate alerts, 3 worked examples, common mistakes) | [`slos.md`](./slos.md) | 2026-06-05 |
 
 ## Why this matters
 

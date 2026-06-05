@@ -136,9 +136,9 @@
 - [ ] Sampling: head-based vs tail-based
 - [ ] Grafana dashboards as code
 - [ ] Loki for logs (label cardinality discipline)
-- [ ] USE / RED methods
-- [ ] SLI / SLO / SLA design + error budgets
-- [ ] Alert design: avoiding fatigue, actionable signals
+- [~] USE / RED methods — mentioned in slos.md context; not deep-dived
+- [x] SLI / SLO / SLA design + error budgets
+- [x] Alert design: avoiding fatigue, actionable signals — covered via multi-window multi-burn-rate
 
 ## 8. AWS / EKS
 - [x] Strong on most AWS components (per interview feedback)
