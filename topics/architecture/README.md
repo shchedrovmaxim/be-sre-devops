@@ -29,7 +29,10 @@ If you only talk about Tech, you sound mid-level.
 
 ## Files
 
-(none yet — to be written; this is the highest-leverage area)
+| Sub-topic | File | Date covered |
+|---|---|---|
+| Simplicity — simple version (moat-instead-of-a-fence analogy) | [`simplicity-simple.md`](./simplicity-simple.md) | 2026-06-05 |
+| Simplicity — KISS, YAGNI, Ousterhout complexity, 4-dimensions framework, ADRs, runbooks, 3 design-question drills | [`simplicity.md`](./simplicity.md) | 2026-06-05 |
 
 ## Why this matters
 

@@ -114,16 +114,16 @@
 - [ ] When to pick each
 
 ## 6. Architecture (senior mindset) — THE rejection gap
-- [ ] KISS, YAGNI, justified complexity
-- [ ] Ousterhout "A Philosophy of Software Design" (chapters 1-3)
-- [ ] ADRs (Architecture Decision Records) — Context / Decision / Consequences
-- [ ] Runbooks as deliverables, not afterthoughts
-- [ ] Onboarding new engineers in <1 week as design constraint
+- [x] KISS, YAGNI, justified complexity
+- [~] Ousterhout "A Philosophy of Software Design" (chapters 1-3) — concepts integrated; reading the book itself is parked
+- [x] ADRs (Architecture Decision Records) — Context / Decision / Consequences
+- [x] Runbooks as deliverables, not afterthoughts
+- [x] Onboarding new engineers in <1 week as design constraint
 - [ ] Blameless postmortems (Google SRE book pattern)
 - [ ] The 5 whys for root cause
 - [ ] CI as architecture (immutable promotion, trunk-based)
-- [ ] **The 4 dimensions framework**: Tech + People + CI/CD + Operations
-- [ ] Practice: 3 design questions answered with all 4 dimensions
+- [x] **The 4 dimensions framework**: Tech + People + CI/CD + Operations
+- [x] Practice: 3 design questions answered with all 4 dimensions
 
 ## 7. Observability
 - [ ] Prometheus: scrape config, targets, relabeling
