@@ -34,7 +34,18 @@ K8s networking is where many incidents start. CNI, NetworkPolicy, kube-proxy, DN
 
 ## Files
 
-(none yet — to be written)
+| File | Type | Topic | Date added |
+|---|---|---|---|
+| `cni-comparison-simple.md` | simple | CNI comparison: Cilium vs Calico vs AWS VPC CNI | 2026-06-05 |
+| `cni-comparison.md` | deep-dive | CNI comparison: Cilium vs Calico vs AWS VPC CNI | 2026-06-05 |
+| `network-policy-simple.md` | simple | NetworkPolicy: default-deny, tenant isolation, L7 limits | 2026-06-05 |
+| `network-policy.md` | deep-dive | NetworkPolicy: default-deny, tenant isolation, L7 limits | 2026-06-05 |
+| `kube-proxy-modes-simple.md` | simple | kube-proxy modes: iptables vs IPVS vs Cilium eBPF | 2026-06-05 |
+| `kube-proxy-modes.md` | deep-dive | kube-proxy modes: iptables vs IPVS vs Cilium eBPF | 2026-06-05 |
+| `coredns-nodelocal-simple.md` | simple | CoreDNS + NodeLocal DNS Cache | 2026-06-05 |
+| `coredns-nodelocal.md` | deep-dive | CoreDNS + NodeLocal DNS Cache | 2026-06-05 |
+| `conntrack-dns-simple.md` | simple | conntrack table + UDP DNS race condition | 2026-06-05 |
+| `conntrack-dns.md` | deep-dive | conntrack table + UDP DNS race condition | 2026-06-05 |
 
 ## Why this matters
 

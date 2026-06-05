@@ -26,7 +26,18 @@ Most senior SRE roles run on EKS. Strong AWS knowledge was confirmed in the reje
 
 ## Files
 
-(none yet — to be written)
+| File | Type | Topic | Date |
+|---|---|---|---|
+| [karpenter-vs-cas-simple.md](./karpenter-vs-cas-simple.md) | Simple companion | Karpenter vs Cluster Autoscaler | 2026-06-05 |
+| [karpenter-vs-cas.md](./karpenter-vs-cas.md) | Deep-dive | Karpenter vs Cluster Autoscaler | 2026-06-05 |
+| [irsa-simple.md](./irsa-simple.md) | Simple companion | IRSA token exchange end-to-end | 2026-06-05 |
+| [irsa.md](./irsa.md) | Deep-dive | IRSA token exchange end-to-end | 2026-06-05 |
+| [vpc-cni-simple.md](./vpc-cni-simple.md) | Simple companion | AWS VPC CNI internals | 2026-06-05 |
+| [vpc-cni.md](./vpc-cni.md) | Deep-dive | AWS VPC CNI internals | 2026-06-05 |
+| [aws-lb-controller-simple.md](./aws-lb-controller-simple.md) | Simple companion | AWS Load Balancer Controller (NLB vs ALB, target types) | 2026-06-05 |
+| [aws-lb-controller.md](./aws-lb-controller.md) | Deep-dive | AWS Load Balancer Controller (NLB vs ALB, target types) | 2026-06-05 |
+| [eks-upgrades-simple.md](./eks-upgrades-simple.md) | Simple companion | EKS upgrades (control plane + nodegroups) | 2026-06-05 |
+| [eks-upgrades.md](./eks-upgrades.md) | Deep-dive | EKS upgrades (control plane + nodegroups) | 2026-06-05 |
 
 ## Why this matters
 

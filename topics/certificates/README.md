@@ -15,7 +15,18 @@ TLS cert lifecycle on K8s. The rejection feedback specifically called out Let's 
 
 ## Files
 
-(none yet — to be written)
+| File | Type | Topic | Date |
+|---|---|---|---|
+| [acme-letsencrypt-simple.md](./acme-letsencrypt-simple.md) | Simple companion | ACME + Let's Encrypt | 2026-06-05 |
+| [acme-letsencrypt.md](./acme-letsencrypt.md) | Deep-dive | ACME + Let's Encrypt | 2026-06-05 |
+| [cert-manager-simple.md](./cert-manager-simple.md) | Simple companion | cert-manager CRDs | 2026-06-05 |
+| [cert-manager.md](./cert-manager.md) | Deep-dive | cert-manager CRDs | 2026-06-05 |
+| [acme-challenges-simple.md](./acme-challenges-simple.md) | Simple companion | HTTP-01 vs DNS-01 vs TLS-ALPN-01 | 2026-06-05 |
+| [acme-challenges.md](./acme-challenges.md) | Deep-dive | HTTP-01 vs DNS-01 vs TLS-ALPN-01 | 2026-06-05 |
+| [vault-pki-simple.md](./vault-pki-simple.md) | Simple companion | Vault as internal CA | 2026-06-05 |
+| [vault-pki.md](./vault-pki.md) | Deep-dive | Vault as internal CA | 2026-06-05 |
+| [cert-rotation-simple.md](./cert-rotation-simple.md) | Simple companion | Cert rotation + monitoring expiry | 2026-06-05 |
+| [cert-rotation.md](./cert-rotation.md) | Deep-dive | Cert rotation + monitoring expiry | 2026-06-05 |
 
 ## Why this matters
 

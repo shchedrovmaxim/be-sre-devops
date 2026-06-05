@@ -98,20 +98,20 @@
 - [ ] Conftest / OPA in CI
 
 ## 4. Certificates
-- [ ] Let's Encrypt + ACME protocol
-- [ ] HTTP-01 vs DNS-01 vs TLS-ALPN-01 challenges
-- [ ] When DNS-01 is required (wildcard certs)
-- [ ] cert-manager: Issuer / ClusterIssuer / Certificate
-- [ ] Rate limits and staging environment
-- [ ] Vault as internal CA
-- [ ] Cert rotation patterns + monitoring expiry
+- [x] Let's Encrypt + ACME protocol
+- [x] HTTP-01 vs DNS-01 vs TLS-ALPN-01 challenges
+- [x] When DNS-01 is required (wildcard certs)
+- [x] cert-manager: Issuer / ClusterIssuer / Certificate
+- [x] Rate limits and staging environment
+- [x] Vault as internal CA
+- [x] Cert rotation patterns + monitoring expiry
 
 ## 5. Secrets management
-- [ ] Sealed Secrets — encrypted in Git, decrypted by controller
-- [ ] External Secrets Operator (ESO) — SecretStore, ExternalSecret CRDs
-- [ ] SOPS + age/KMS — file-level encryption
-- [ ] Vault as source of truth + ESO sync pattern
-- [ ] When to pick each
+- [x] Sealed Secrets — encrypted in Git, decrypted by controller
+- [x] External Secrets Operator (ESO) — SecretStore, ExternalSecret CRDs
+- [x] SOPS + age/KMS — file-level encryption
+- [x] Vault as source of truth + ESO sync pattern
+- [x] When to pick each
 
 ## 6. Architecture (senior mindset) — THE rejection gap
 - [x] KISS, YAGNI, justified complexity
@@ -142,35 +142,35 @@
 
 ## 8. AWS / EKS
 - [x] Strong on most AWS components (per interview feedback)
-- [ ] EKS upgrades: control plane + nodegroups, in-place vs blue-green
-- [ ] Karpenter vs Cluster Autoscaler — pros/cons
-- [ ] IRSA — how the token exchange works end-to-end
-- [ ] AWS VPC CNI: prefix delegation, security groups for pods
-- [ ] AWS Load Balancer Controller: NLB vs ALB, target types
+- [x] EKS upgrades: control plane + nodegroups, in-place vs blue-green
+- [x] Karpenter vs Cluster Autoscaler — pros/cons
+- [x] IRSA — how the token exchange works end-to-end
+- [x] AWS VPC CNI: prefix delegation, security groups for pods
+- [x] AWS Load Balancer Controller: NLB vs ALB, target types
 - [ ] ExternalDNS for Route 53
 - [ ] CloudFront + Shield + WAF in front of EKS
 - [ ] Secrets Manager vs Parameter Store
 - [ ] CloudWatch vs Prometheus/OTel — cost trade-offs
 
 ## 9. Terraform
-- [ ] Remote state: S3 backend + DynamoDB locking
-- [ ] Workspaces vs separate state per env (and why workspaces are usually wrong)
-- [ ] Module discipline: when to write vs use registry
-- [ ] `terraform_data`, `lifecycle` blocks, `moved` blocks
-- [ ] Drift detection: scheduled `plan` + alerting
-- [ ] Atlantis / Spacelift / Terragrunt — PR-based workflows
-- [ ] Testing: terratest, native `terraform test` (1.6+)
-- [ ] Multi-account AWS patterns
+- [x] Remote state: S3 backend + DynamoDB locking
+- [x] Workspaces vs separate state per env (and why workspaces are usually wrong)
+- [x] Module discipline: when to write vs use registry
+- [~] `terraform_data`, `lifecycle` blocks, `moved` blocks — partially in modules + drift-detection
+- [x] Drift detection: scheduled `plan` + alerting
+- [x] Atlantis / Spacelift / Terragrunt — PR-based workflows
+- [~] Testing: terratest, native `terraform test` (1.6+) — mentioned in modules, not deep
+- [~] Multi-account AWS patterns — touched in pr-workflows, not deep
 
 ## 10. Networking (cross-cutting)
-- [ ] CNI internals: Cilium, Calico, AWS VPC CNI
-- [ ] NetworkPolicy: ingress + egress
-- [ ] kube-proxy modes
-- [ ] CoreDNS Corefile + plugins
-- [ ] NodeLocal DNS Cache
-- [ ] conntrack table limits + UDP DNS implications
+- [x] CNI internals: Cilium, Calico, AWS VPC CNI
+- [x] NetworkPolicy: ingress + egress
+- [x] kube-proxy modes
+- [x] CoreDNS Corefile + plugins
+- [x] NodeLocal DNS Cache
+- [x] conntrack table limits + UDP DNS implications
 - [ ] Gateway API
-- [ ] eBPF basics + Cilium replacing kube-proxy
+- [~] eBPF basics + Cilium replacing kube-proxy — covered in cni-comparison + kube-proxy-modes
 
 ## 11. Istio (mostly done) ✅
 - [x] Architecture: istiod + Envoy, xDS
