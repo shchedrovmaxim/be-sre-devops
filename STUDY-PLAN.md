@@ -30,6 +30,66 @@
 
 ---
 
+## Progress checklist
+
+Tick each day when complete. Each day, also write a recap in `notes/YYYY-MM-DD.md` (template at `notes/_daily-template.md`). At end of each week, write `notes/week-N-checkin.md`. Append to `notes/weak-spots.md` whenever you fumble.
+
+### Week 1 — Linux + K8s scheduling foundation
+- [ ] **Day 1** — Re-anchor: cgroups + 3-question scheduling flow
+- [ ] **Day 2** — Linux: cgroups v1-vs-v2 + IO + namespaces
+- [ ] **Day 3** — Linux: runc + iptables
+- [ ] **Day 4** — Linux: systemd + ulimits
+- [ ] **Day 5** — K8s scheduling deep + priority + preemption
+- [ ] **Day 6** — Mid-week catch-up + first hands-on
+- [ ] **Day 7** — Light: weakest Linux topic deep-dive
+
+### Week 2 — K8s workloads, lifecycle, networking, storage
+- [ ] **Day 8** — Pod lifecycle (the killer interview topic)
+- [ ] **Day 9** — Workloads: Deployment + StatefulSet
+- [ ] **Day 10** — Workloads: DaemonSet + Job/CronJob + HPA
+- [ ] **Day 11** — Resource management
+- [ ] **Day 12** — K8s Networking: Services, Endpoints, Ingress/Gateway
+- [ ] **Day 13** — K8s Storage: CSI + StorageClass + PVC lifecycle
+- [ ] **Day 14** — Light: Volume expansion + snapshots
+
+### Week 3 — K8s security/ops + Certificates + Secrets
+- [ ] **Day 15** — RBAC + ServiceAccounts
+- [ ] **Day 16** — PSS + securityContext + image pull secrets
+- [ ] **Day 17** — etcd + control plane
+- [ ] **Day 18** — Upgrades + kubeadm-vs-managed
+- [ ] **Day 19** — Certificates
+- [ ] **Day 20** — Secrets
+- [ ] **Day 21** — Light: Vault PKI + cert rotation + secrets comparison
+
+### Week 4 — CI/CD + AWS + Mock Interview 1
+- [ ] **Day 22** — Multi-stage + image scanning + SBOM
+- [ ] **Day 23** — Cosign + Kyverno + OPA
+- [ ] **Day 24** — ArgoCD foundation
+- [ ] **Day 25** — ArgoCD advanced
+- [ ] **Day 26** — AWS/EKS core
+- [ ] **Day 27** — AWS networking + ops
+- [ ] **Day 28** — 🎯 **MOCK INTERVIEW 1**
+
+### Week 5 — Observability + Architecture + Terraform + Networking
+- [ ] **Day 29** — Address mock weak areas
+- [ ] **Day 30** — Observability: SLOs + Prometheus
+- [ ] **Day 31** — PromQL + recording rules + cardinality
+- [ ] **Day 32** — OTel + long-term storage
+- [ ] **Day 33** — Architecture senior mindset
+- [ ] **Day 34** — Terraform
+- [ ] **Day 35** — Networking
+
+### Week 6 — Drill, mock, finalize
+- [ ] **Day 36** — Drill day 1 (Linux + K8s + CI/CD)
+- [ ] **Day 37** — Drill day 2 (Observability + AWS + Architecture + others)
+- [ ] **Day 38** — Deep-dive on weakest 3 topics
+- [ ] **Day 39** — Architecture design drill (3 scenarios)
+- [ ] **Day 40** — Behavioral + STAR practice
+- [ ] **Day 41** — 🎯 **MOCK INTERVIEW 2**
+- [ ] **Day 42** — Final polish + plan beyond
+
+---
+
 # PHASE 1 — Foundation & First-pass intuition
 
 ## Week 1 — Linux internals + K8s scheduling foundation
