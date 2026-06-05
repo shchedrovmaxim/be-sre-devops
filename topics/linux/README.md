@@ -42,23 +42,23 @@ Try each out loud as if explaining to an interviewer. If you fumble, that's the 
 
 | Sub-topic | File | Date covered |
 |---|---|---|
-| cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj`, QoS mapping | [`cgroups-memory.md`](./cgroups-memory.md) | 2026-06-01 |
-| cgroups CPU — `cpu.max`, `cpu.weight`, CFS quota+period, throttling, GOMAXPROCS trap | [`cgroups-cpu.md`](./cgroups-cpu.md) | 2026-06-02 |
-| cgroups CPU — simple version (buffet analogy, single-vs-multi-thread intuition) | [`cgroups-cpu-simple.md`](./cgroups-cpu-simple.md) | 2026-06-02 |
-| cgroups v1 vs v2 — unified hierarchy, PSI, kubelet cgroup-driver story, distro defaults | [`cgroups-v1-vs-v2.md`](./cgroups-v1-vs-v2.md) | 2026-06-05 |
-| cgroups v1 vs v2 — simple version (USB hub analogy, PSI intuition) | [`cgroups-v1-vs-v2-simple.md`](./cgroups-v1-vs-v2-simple.md) | 2026-06-05 |
-| cgroups IO — `io.max`, `io.stat`, blkio vs io, EBS gp2/gp3 throttling, CloudWatch signals | [`cgroups-io.md`](./cgroups-io.md) | 2026-06-05 |
-| cgroups IO — simple version (toll booth analogy, EBS burst credit trap) | [`cgroups-io-simple.md`](./cgroups-io-simple.md) | 2026-06-05 |
-| Linux namespaces — all 8 types, clone/unshare/setns, user ns UID mapping, cgroup ns | [`namespaces.md`](./namespaces.md) | 2026-06-05 |
-| Linux namespaces — simple version (hotel room analogy, PID 1 trap, rootless containers) | [`namespaces-simple.md`](./namespaces-simple.md) | 2026-06-05 |
-| runc internals — OCI spec, clone/pivot_root/exec sequence, containerd→runc chain, rootless | [`runc-internals.md`](./runc-internals.md) | 2026-06-05 |
-| runc internals — simple version (flat-pack analogy, pivot_root vs chroot, docker exec) | [`runc-internals-simple.md`](./runc-internals-simple.md) | 2026-06-05 |
-| iptables / nftables — 5 tables, 5 chains, kube-proxy DNAT chains, conntrack, nftables, Cilium | [`iptables-nftables.md`](./iptables-nftables.md) | 2026-06-05 |
-| iptables / nftables — simple version (post office analogy, Service DNAT intuition) | [`iptables-nftables-simple.md`](./iptables-nftables-simple.md) | 2026-06-05 |
-| systemd basics + journalctl — unit types, service anatomy, kubepods.slice, cgroup-driver, debug flows | [`systemd-basics.md`](./systemd-basics.md) | 2026-06-05 |
-| systemd basics — simple version (factory supervisor analogy, 3-command kubelet diagnosis) | [`systemd-basics-simple.md`](./systemd-basics-simple.md) | 2026-06-05 |
-| ulimits, file descriptors, inodes — 4 FD limit layers, inheritance, inode exhaustion | [`ulimits-fds.md`](./ulimits-fds.md) | 2026-06-05 |
-| ulimits, file descriptors, inodes — simple version (key ring analogy, inode trap) | [`ulimits-fds-simple.md`](./ulimits-fds-simple.md) | 2026-06-05 |
+| cgroups memory — `memory.max`, OOM mechanics, `oom_score_adj`, QoS mapping | [`cgroups-memory.md`](./cgroups-memory/deep-dive.md) | 2026-06-01 |
+| cgroups CPU — `cpu.max`, `cpu.weight`, CFS quota+period, throttling, GOMAXPROCS trap | [`cgroups-cpu.md`](./cgroups-cpu/deep-dive.md) | 2026-06-02 |
+| cgroups CPU — simple version (buffet analogy, single-vs-multi-thread intuition) | [`cgroups-cpu-simple.md`](./cgroups-cpu/simple.md) | 2026-06-02 |
+| cgroups v1 vs v2 — unified hierarchy, PSI, kubelet cgroup-driver story, distro defaults | [`cgroups-v1-vs-v2.md`](./cgroups-v1-vs-v2/deep-dive.md) | 2026-06-05 |
+| cgroups v1 vs v2 — simple version (USB hub analogy, PSI intuition) | [`cgroups-v1-vs-v2-simple.md`](./cgroups-v1-vs-v2/simple.md) | 2026-06-05 |
+| cgroups IO — `io.max`, `io.stat`, blkio vs io, EBS gp2/gp3 throttling, CloudWatch signals | [`cgroups-io.md`](./cgroups-io/deep-dive.md) | 2026-06-05 |
+| cgroups IO — simple version (toll booth analogy, EBS burst credit trap) | [`cgroups-io-simple.md`](./cgroups-io/simple.md) | 2026-06-05 |
+| Linux namespaces — all 8 types, clone/unshare/setns, user ns UID mapping, cgroup ns | [`namespaces.md`](./namespaces/deep-dive.md) | 2026-06-05 |
+| Linux namespaces — simple version (hotel room analogy, PID 1 trap, rootless containers) | [`namespaces-simple.md`](./namespaces/simple.md) | 2026-06-05 |
+| runc internals — OCI spec, clone/pivot_root/exec sequence, containerd→runc chain, rootless | [`runc-internals.md`](./runc-internals/deep-dive.md) | 2026-06-05 |
+| runc internals — simple version (flat-pack analogy, pivot_root vs chroot, docker exec) | [`runc-internals-simple.md`](./runc-internals/simple.md) | 2026-06-05 |
+| iptables / nftables — 5 tables, 5 chains, kube-proxy DNAT chains, conntrack, nftables, Cilium | [`iptables-nftables.md`](./iptables-nftables/deep-dive.md) | 2026-06-05 |
+| iptables / nftables — simple version (post office analogy, Service DNAT intuition) | [`iptables-nftables-simple.md`](./iptables-nftables/simple.md) | 2026-06-05 |
+| systemd basics + journalctl — unit types, service anatomy, kubepods.slice, cgroup-driver, debug flows | [`systemd-basics.md`](./systemd-basics/deep-dive.md) | 2026-06-05 |
+| systemd basics — simple version (factory supervisor analogy, 3-command kubelet diagnosis) | [`systemd-basics-simple.md`](./systemd-basics/simple.md) | 2026-06-05 |
+| ulimits, file descriptors, inodes — 4 FD limit layers, inheritance, inode exhaustion | [`ulimits-fds.md`](./ulimits-fds/deep-dive.md) | 2026-06-05 |
+| ulimits, file descriptors, inodes — simple version (key ring analogy, inode trap) | [`ulimits-fds-simple.md`](./ulimits-fds/simple.md) | 2026-06-05 |
 
 ---
 

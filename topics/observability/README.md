@@ -35,26 +35,26 @@ Metrics, logs, traces. The signal you operate the system from. SLO-driven thinki
 
 | Sub-topic | File | Date covered |
 |---|---|---|
-| SLI / SLO / Error budgets — simple version (monthly data-plan analogy) | [`slos-simple.md`](./slos-simple.md) | 2026-06-05 |
-| SLI / SLO / SLA / Error budgets — deep-dive (CUJ, budget policy, multi-window multi-burn-rate alerts, 3 worked examples, common mistakes) | [`slos.md`](./slos.md) | 2026-06-05 |
-| Prometheus architecture + scrape config + relabeling — simple version (newspaper reporter analogy) | [`prometheus-architecture-simple.md`](./prometheus-architecture-simple.md) | 2026-06-05 |
-| Prometheus architecture + scrape config + relabeling — deep-dive (full pipeline, 7 relabeling actions, Kubernetes SD patterns, ServiceMonitor, 4 drills) | [`prometheus-architecture.md`](./prometheus-architecture.md) | 2026-06-05 |
-| Recording rules vs alerting rules — simple version (sous chef analogy) | [`recording-vs-alerting-rules-simple.md`](./recording-vs-alerting-rules-simple.md) | 2026-06-05 |
-| Recording rules vs alerting rules — deep-dive (naming convention, SLO burn-rate pattern, reload mechanics, PrometheusRule CRD, 4 drills) | [`recording-vs-alerting-rules.md`](./recording-vs-alerting-rules.md) | 2026-06-05 |
-| PromQL essentials — simple version (odometer/speedometer analogy) | [`promql-essentials-simple.md`](./promql-essentials-simple.md) | 2026-06-05 |
-| PromQL essentials — deep-dive (rate vs irate, histogram_quantile, topk, _over_time, absent, staleness, offset, 4 drills) | [`promql-essentials.md`](./promql-essentials.md) | 2026-06-05 |
-| Cardinality discipline — simple version (filing cabinet analogy) | [`cardinality-discipline-simple.md`](./cardinality-discipline-simple.md) | 2026-06-05 |
-| Cardinality discipline — deep-dive (cardinality math, memory cost, TSDB admin API, labeldrop remediation, sample_limit, Loki parallel, 4 drills) | [`cardinality-discipline.md`](./cardinality-discipline.md) | 2026-06-05 |
-| Long-term storage (Thanos / Mimir / VictoriaMetrics) — simple version (filing room analogy) | [`long-term-storage-simple.md`](./long-term-storage-simple.md) | 2026-06-05 |
-| Long-term storage (Thanos / Mimir / VictoriaMetrics) — deep-dive (architecture, deduplication, downsampling, trade-off matrix, 3 drills) | [`long-term-storage.md`](./long-term-storage.md) | 2026-06-05 |
-| OTel Collector — simple version (sorting facility analogy) | [`otel-collector-simple.md`](./otel-collector-simple.md) | 2026-06-05 |
-| OTel Collector — deep-dive (receivers, processors, exporters, agent vs gateway, tail sampling, loadbalancing exporter, 3 drills) | [`otel-collector.md`](./otel-collector.md) | 2026-06-05 |
-| OTel semantic conventions + sampling — simple version (passport / border analogy) | [`otel-conventions-sampling-simple.md`](./otel-conventions-sampling-simple.md) | 2026-06-05 |
-| OTel semantic conventions + sampling — deep-dive (all namespaces, HTTP migration, head/tail sampling, W3C TraceContext, tail_sampling processor, 3 drills) | [`otel-conventions-sampling.md`](./otel-conventions-sampling.md) | 2026-06-05 |
-| Grafana dashboards as code — simple version (blueprint analogy) | [`grafana-as-code-simple.md`](./grafana-as-code-simple.md) | 2026-06-05 |
-| Grafana dashboards as code — deep-dive (Grafonnet, Foundation SDK, Grafana Operator, file provisioning, testing, access control, 3 drills) | [`grafana-as-code.md`](./grafana-as-code.md) | 2026-06-05 |
-| Loki + label cardinality — simple version (library catalogue analogy) | [`loki-cardinality-simple.md`](./loki-cardinality-simple.md) | 2026-06-05 |
-| Loki + label cardinality — deep-dive (storage model, chunks_per_stream canary, LogQL extraction, structured logging, ingestion limits, 4 drills) | [`loki-cardinality.md`](./loki-cardinality.md) | 2026-06-05 |
+| SLI / SLO / Error budgets — simple version (monthly data-plan analogy) | [`slos-simple.md`](./slos/simple.md) | 2026-06-05 |
+| SLI / SLO / SLA / Error budgets — deep-dive (CUJ, budget policy, multi-window multi-burn-rate alerts, 3 worked examples, common mistakes) | [`slos.md`](./slos/deep-dive.md) | 2026-06-05 |
+| Prometheus architecture + scrape config + relabeling — simple version (newspaper reporter analogy) | [`prometheus-architecture-simple.md`](./prometheus-architecture/simple.md) | 2026-06-05 |
+| Prometheus architecture + scrape config + relabeling — deep-dive (full pipeline, 7 relabeling actions, Kubernetes SD patterns, ServiceMonitor, 4 drills) | [`prometheus-architecture.md`](./prometheus-architecture/deep-dive.md) | 2026-06-05 |
+| Recording rules vs alerting rules — simple version (sous chef analogy) | [`recording-vs-alerting-rules-simple.md`](./recording-vs-alerting-rules/simple.md) | 2026-06-05 |
+| Recording rules vs alerting rules — deep-dive (naming convention, SLO burn-rate pattern, reload mechanics, PrometheusRule CRD, 4 drills) | [`recording-vs-alerting-rules.md`](./recording-vs-alerting-rules/deep-dive.md) | 2026-06-05 |
+| PromQL essentials — simple version (odometer/speedometer analogy) | [`promql-essentials-simple.md`](./promql-essentials/simple.md) | 2026-06-05 |
+| PromQL essentials — deep-dive (rate vs irate, histogram_quantile, topk, _over_time, absent, staleness, offset, 4 drills) | [`promql-essentials.md`](./promql-essentials/deep-dive.md) | 2026-06-05 |
+| Cardinality discipline — simple version (filing cabinet analogy) | [`cardinality-discipline-simple.md`](./cardinality-discipline/simple.md) | 2026-06-05 |
+| Cardinality discipline — deep-dive (cardinality math, memory cost, TSDB admin API, labeldrop remediation, sample_limit, Loki parallel, 4 drills) | [`cardinality-discipline.md`](./cardinality-discipline/deep-dive.md) | 2026-06-05 |
+| Long-term storage (Thanos / Mimir / VictoriaMetrics) — simple version (filing room analogy) | [`long-term-storage-simple.md`](./long-term-storage/simple.md) | 2026-06-05 |
+| Long-term storage (Thanos / Mimir / VictoriaMetrics) — deep-dive (architecture, deduplication, downsampling, trade-off matrix, 3 drills) | [`long-term-storage.md`](./long-term-storage/deep-dive.md) | 2026-06-05 |
+| OTel Collector — simple version (sorting facility analogy) | [`otel-collector-simple.md`](./otel-collector/simple.md) | 2026-06-05 |
+| OTel Collector — deep-dive (receivers, processors, exporters, agent vs gateway, tail sampling, loadbalancing exporter, 3 drills) | [`otel-collector.md`](./otel-collector/deep-dive.md) | 2026-06-05 |
+| OTel semantic conventions + sampling — simple version (passport / border analogy) | [`otel-conventions-sampling-simple.md`](./otel-conventions-sampling/simple.md) | 2026-06-05 |
+| OTel semantic conventions + sampling — deep-dive (all namespaces, HTTP migration, head/tail sampling, W3C TraceContext, tail_sampling processor, 3 drills) | [`otel-conventions-sampling.md`](./otel-conventions-sampling/deep-dive.md) | 2026-06-05 |
+| Grafana dashboards as code — simple version (blueprint analogy) | [`grafana-as-code-simple.md`](./grafana-as-code/simple.md) | 2026-06-05 |
+| Grafana dashboards as code — deep-dive (Grafonnet, Foundation SDK, Grafana Operator, file provisioning, testing, access control, 3 drills) | [`grafana-as-code.md`](./grafana-as-code/deep-dive.md) | 2026-06-05 |
+| Loki + label cardinality — simple version (library catalogue analogy) | [`loki-cardinality-simple.md`](./loki-cardinality/simple.md) | 2026-06-05 |
+| Loki + label cardinality — deep-dive (storage model, chunks_per_stream canary, LogQL extraction, structured logging, ingestion limits, 4 drills) | [`loki-cardinality.md`](./loki-cardinality/deep-dive.md) | 2026-06-05 |
 
 ## Why this matters
 

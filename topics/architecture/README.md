@@ -31,12 +31,12 @@ If you only talk about Tech, you sound mid-level.
 
 | Sub-topic | File | Date covered |
 |---|---|---|
-| Simplicity — simple version (moat-instead-of-a-fence analogy) | [`simplicity-simple.md`](./simplicity-simple.md) | 2026-06-05 |
-| Simplicity — KISS, YAGNI, Ousterhout complexity, 4-dimensions framework, ADRs, runbooks, 3 design-question drills | [`simplicity.md`](./simplicity.md) | 2026-06-05 |
-| Blameless postmortems + 5 whys — simple version (broken-staircase analogy) | [`postmortems-five-whys-simple.md`](./postmortems-five-whys-simple.md) | 2026-06-05 |
-| Blameless postmortems + 5 whys — Google SRE template, blame reframing patterns, action item discipline | [`postmortems-five-whys.md`](./postmortems-five-whys.md) | 2026-06-05 |
-| CI as architecture — simple version (stamp-on-the-parcel analogy) | [`ci-as-architecture-simple.md`](./ci-as-architecture-simple.md) | 2026-06-05 |
-| CI as architecture — DORA metrics, trunk-based, immutable promotion, feature flags, GitOps | [`ci-as-architecture.md`](./ci-as-architecture.md) | 2026-06-05 |
+| Simplicity — simple version (moat-instead-of-a-fence analogy) | [`simplicity-simple.md`](./simplicity/simple.md) | 2026-06-05 |
+| Simplicity — KISS, YAGNI, Ousterhout complexity, 4-dimensions framework, ADRs, runbooks, 3 design-question drills | [`simplicity.md`](./simplicity/deep-dive.md) | 2026-06-05 |
+| Blameless postmortems + 5 whys — simple version (broken-staircase analogy) | [`postmortems-five-whys-simple.md`](./postmortems-five-whys/simple.md) | 2026-06-05 |
+| Blameless postmortems + 5 whys — Google SRE template, blame reframing patterns, action item discipline | [`postmortems-five-whys.md`](./postmortems-five-whys/deep-dive.md) | 2026-06-05 |
+| CI as architecture — simple version (stamp-on-the-parcel analogy) | [`ci-as-architecture-simple.md`](./ci-as-architecture/simple.md) | 2026-06-05 |
+| CI as architecture — DORA metrics, trunk-based, immutable promotion, feature flags, GitOps | [`ci-as-architecture.md`](./ci-as-architecture/deep-dive.md) | 2026-06-05 |
 
 ## Why this matters
 
